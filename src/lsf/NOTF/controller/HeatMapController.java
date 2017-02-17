@@ -6,6 +6,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import org.json.JSONArray;
+
 import lsf.NOTF.WS.db_connect;
 
 @Path("/HeatMapController")
@@ -15,8 +17,12 @@ public class HeatMapController {
 	@Produces("application/json")
 	public Response generateJson(@PathParam("graphData") String table){
 		db_connect db_conn = new db_connect();
-		db_conn.db_con(table);
-		return null;
+		JSONArray j_arr = db_conn.db_con(table);
+		
+		
+		
+		
+		return Response.status(200).entity(j_arr.toString()).build();
 	}
 
 }

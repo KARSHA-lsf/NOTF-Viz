@@ -4,6 +4,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
@@ -16,8 +19,8 @@ public class db_connect {
 	   // Database credentials
 	   String USER = "root";
 	   String PASS = "";
-	   
-	   public void db_con(String table) {
+	   JSONArray jsonArray = new JSONArray();
+	   public JSONArray db_con(String table) {
 		   java.sql.Connection conn = null;
 		   java.sql.Statement stmt = null;
 		   try{
@@ -32,17 +35,21 @@ public class db_connect {
 		      System.out.println("Creating statement...");
 		      stmt = conn.createStatement();
 		      String sql;
-		      sql = "SELECT * from "+table+";";
+		      sql = "SELECT * from "+table+" where not value = 0;";
 		      ResultSet rs = stmt.executeQuery(sql);
-
+		      
+		      
 		      //STEP 5: Extract data from result set
 		      while(rs.next()){
 		         //Retrieve by column name
-		         String row  = rs.getString("row_idx");
-		         String col  = rs.getString("col_idx");
-		         String value  = rs.getString("log2ratio");
-		         
-		         System.out.println(row+" : "+col+" : "+value);
+		    	 JSONObject jsonObject = new JSONObject();
+		    	 
+		    	 jsonObject.put("row_id",rs.getString("row_id"));
+		    	 jsonObject.put("fact_id",rs.getString("fact_id"));
+		    	 jsonObject.put("value",rs.getString("value"));
+		    	 jsonArray.put(jsonObject);
+		         		         
+		        // System.out.println(row+" : "+col+" : "+value);
 		      }
 		      //STEP 6: Clean-up environment
 		      rs.close();
@@ -69,6 +76,8 @@ public class db_connect {
 		      }//end finally try
 		   }//end try
 		   System.out.println("Goodbye!");
+		   
+		   return jsonArray;
 		   
 	   }
 		
