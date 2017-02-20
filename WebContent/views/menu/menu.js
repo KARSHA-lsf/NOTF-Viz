@@ -30,7 +30,7 @@ angular.module('HHF', [])
                 "text": "LMx",
                 "subItem":[{
                 	"text":"Permno",
-                	"link":"\/Permno"
+                	"link":"\heatmap.html?tabel=notf_lmx_2004_dates_20f"
                 	},
                 	{"text":"Date",
                 	"link":"\/Date"

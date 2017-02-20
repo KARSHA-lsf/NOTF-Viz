@@ -44,9 +44,9 @@ public class db_connect {
 		         //Retrieve by column name
 		    	 JSONObject jsonObject = new JSONObject();
 		    	 
-		    	 jsonObject.put("row_id",rs.getString("row_id"));
-		    	 jsonObject.put("fact_id",rs.getString("fact_id"));
-		    	 jsonObject.put("value",rs.getString("value"));
+		    	 jsonObject.put("row_id",Integer.parseInt(rs.getString("row_id")));
+		    	 jsonObject.put("fact_id",Integer.parseInt(rs.getString("fact_id")));
+		    	 jsonObject.put("value",Double.parseDouble(rs.getString("value")));
 		    	 jsonArray.put(jsonObject);
 		         		         
 		        // System.out.println(row+" : "+col+" : "+value);
