@@ -1,4 +1,7 @@
  /* disable text selection */
+	#chart{
+		 overflow: scroll;
+	}
       svg *::selection {
          background : transparent;
       }
@@ -73,3 +76,5 @@
         font-size: 12px;
         line-height: 20px;
       }
+      
+       

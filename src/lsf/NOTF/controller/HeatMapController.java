@@ -17,11 +17,7 @@ public class HeatMapController {
 	@Produces("application/json")
 	public Response generateJson(@PathParam("graphData") String table){
 		db_connect db_conn = new db_connect();
-		JSONArray j_arr = db_conn.db_con(table);
-		
-		
-		
-		
+		JSONArray j_arr = db_conn.db_con(table);		
 		return Response.status(200).entity(j_arr.toString()).build();
 	}
 

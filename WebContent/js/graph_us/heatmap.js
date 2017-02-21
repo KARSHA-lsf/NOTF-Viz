@@ -27,17 +27,25 @@ d3.json("getDetails/HeatMapController/"+tabel,
  };
 }, */
 function(error, data) {
-	//console.log(data[0].fact_id);
+	//var largest = Math.max.apply(Math, array);
+	var largest = Math.max.apply(Math,data.map(function(o){return o.value;}))
+	//console.log( largest);
+	
  var colorScale = d3.scale.linear()
-     .domain([0,1000])
+     .domain([0,largest])
      .range(['white','red']);
  
  var svg = d3.select("#chart").append("svg")
      .attr("width", width + margin.left + margin.right)
      .attr("height", height + margin.top + margin.bottom)
+    /* .append("rect")
+     .attr("width", "100%")
+     .attr("height", "100%")
+     .attr("fill", "white")*/
      .append("g")
-     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-     ;
+     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+ 
  var rowSortOrder=false;
  var colSortOrder=false;
  var rowLabels = svg.append("g")
@@ -94,15 +102,15 @@ function(error, data) {
        .on("mouseover", function(d){
               //highlight text
               d3.select(this).classed("cell-hover",true);
-              d3.selectAll(".rowLabel").classed("text-highlight",function(r,ri){ return ri==(d.row_id-1);});
-              d3.selectAll(".colLabel").classed("text-highlight",function(c,ci){ return ci==(d.fact_id-1);});
+              d3.selectAll(".rowLabel").classed("text-highlight",function(r,ri){ return ri==(d.fact_id-1);});
+              d3.selectAll(".colLabel").classed("text-highlight",function(c,ci){ return ci==(d.row_id-1);});
        
               //Update the tooltip position and value
               d3.select("#tooltip")
                 .style("left", (d3.event.pageX+10) + "px")
                 .style("top", (d3.event.pageY+10) + "px")
                 .select("#value")
-                .html("Date :"+colLabel[d.fact_id-1]+" and "+rowLabel[d.row_id-1]+"<br /> Value :"+d.value);  
+                .html("Date :"+colLabel[d.row_id-1]+" and "+rowLabel[d.fact_id-1]+"<br /> Value :"+d.value);  
               //Show the tooltip
               d3.select("#tooltip").classed("hidden", false);
        })

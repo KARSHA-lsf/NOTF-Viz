@@ -28,29 +28,32 @@ angular.module('HHF', [])
             "MenuItems": [{
                 "active": true,
                 "text": "LMx",
-                "subItem":[{
+                "subItem":[
+                    {
                 	"text":"Permno",
-                	"link":"\heatmap.html?tabel=notf_lmx_2004_dates_20f&col=252&y_col=permno&csize=10&rows=20"
+                	"link":"\heatmap.html?tabel=notf_lmx_2004_permno_20f&col=711&y_col=permno&csize=10&rows=20"
                 	},
                 	{"text":"Date",
-                	"link":"\heatmap.html?tabel=notf_lmx_2004_dates_20f"
+                	"link":"\heatmap.html?tabel=notf_lmx_2004_dates_20f&col=252&y_col=date&csize=10&rows=20"
                 	},
                 	{"text":"NAICS",
-                    	"link":"\/NAICS"
-                    	}
+                    	"link":"\heatmap.html?tabel=notf_lmx_2004_naics_20f&col=24&y_col=naics&csize=20&rows=20"
+                    }
                 ]
             },{
                 "active": true,
                 "text": "LMn",
-                "subItem":[{
+                "subItem":[
+                    {
                 	"text":"Permno",
-                	"link":"\/Permno"
+                	"link":"\heatmap.html?tabel=notf_lmn_2004_permno_20f&col=711&y_col=permno&csize=10&rows=20"
                 	},
                 	{"text":"Date",
-                	"link":"\/Date"
+                	"link":"\heatmap.html?tabel=notf_lmn_2004_dates_20f&col=252&y_col=date&csize=10&rows=20"
                 	},
                 	{"text":"NAICS",
-                    	"link":"\/NAICS"
-                    	}
+                    	"link":"\heatmap.html?tabel=notf_lmn_2004_naics_20f&col=24&y_col=naics&csize=20&rows=20"
+                    }
                 ]
-            }]};});
+            }
+            ]};});
