@@ -19,16 +19,21 @@
 <link href="css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
 <!-- jVectorMap -->
 <link href="css/maps/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
+<link href="css/switchery.min.css" rel="stylesheet">
 
 <!-- Custom Theme Style -->
 <link href="build/css/custom.min.css" rel="stylesheet">
 <link href="css/custom.css" rel="stylesheet">
 
+
 <script src="http://d3js.org/d3.v3.js"></script>
 <script src="js/angular/angular.min.js" type="text/javascript"></script>
 <script src="views/menu/menu.js" type="text/javascript"></script>
-
-
+<style type="text/css">
+	element.style{
+		box-shadow : rgb(160,177,173)0px 0px 0px 11px inset;
+	}
+</style>
 </head>
 
 <body class="nav-md">
@@ -86,13 +91,18 @@
 			<div class="right_col" role="main">
 				<div class="row">
 
-					<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="col-md-12 col-sm-12 col-xs-12" ng-controller="chart_back">
 						<div class="dashboard_graph">
 							<div class="row x_title">
 								<div class="col-md-6">
-									<h3>
-										LMx LMn 2004 Dataset <small>local maxima and minima</small>
-									</h3>
+									<div id="page_title"></div>
+								</div>
+								<div class="col-md-3">
+                           			<div class="">
+			                            <label>
+			                              <input id="bg_color" type="checkbox" class="js-switch"  /> Background Color 
+			                            </label>
+			                        </div>
 								</div>
 							</div>
 
@@ -101,7 +111,7 @@
 									<span id="value">
 								</p>
 							</div>
-							<div id="chart"></div>
+							<div id="chart" ></div>
 							<div class="clearfix"></div>
 						</div>
 					</div>
@@ -164,10 +174,13 @@
 	<!-- bootstrap-daterangepicker -->
 	<script src="js/moment/moment.min.js"></script>
 	<script src="js/datepicker/daterangepicker.js"></script>
+	<script src="js/switchery.min.js"></script>
 
 	<!-- Custom Theme Scripts -->
 	<script src="build/js/custom.min.js"></script>
 	<script type="text/javascript">
+	
+	
 	$.urlParam = function(name){
 		var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
 			if (results==null){
@@ -180,16 +193,21 @@
 	var tabel = $.urlParam('tabel');
 	var col_number= $.urlParam('col');
 	var y_col = $.urlParam('y_col');
+	var title_main = $.urlParam('title_main').replace("%20"," ").replace("%20"," ");
+	var title_sub = $.urlParam('title_sub');
+	
+	$("#page_title").html("<h3>"+title_main+" <small> "+ title_sub +" 2004 Dataset </small></h3>");
 	
 	if($.urlParam('csize') != null){cellSize = $.urlParam('csize');}
 	if($.urlParam('rows') != null){row_number = $.urlParam('rows');}
 	//console.log("kkkkk : "+row_number);
-	
-	if(row_number = 20){
+	//console.log("llll : "+row_number);
+	if(row_number == 20){
 		rowLabel = ['com1','com2','com3','com4','com5','com6','com7','com8','com9','com10','com11','com12','com13','com14','com15','com16','com17','com18','com19','com20']; 
-	}else if(row_number = 15){
+	}else if(row_number == 15){
 		rowLabel = ['com1','com2','com3','com4','com5','com6','com7','com8','com9','com10','com11','com12','com13','com14','com15']; 
-	}else if(row_number = 25){
+	}else if(row_number == 25){
+		//console.log("llllkkk : "+row_number);
 		rowLabel = ['com1','com2','com3','com4','com5','com6','com7','com8','com9','com10','com11','com12','com13','com14','com15','com16','com17','com18','com19','com20','com21','com22','com23','com24','com25']; 
 	}
 	//console.log("PPPPP :"+rowLabel);
@@ -266,7 +284,26 @@
 	});*/
 	</script>
 	<script src="js/graph_us/heatmap.js" type="text/javascript"></script>
-
+	<script type="text/javascript">
+	//console.log("clor :"+$("#bg_color").attr('checked', true));
+	
+		 $('#bg_color').click(function() {
+			var $bg_color = $( this );
+			if ($bg_color.prop( "checked" )) {
+				$('#chart').css('background-color', '#2a3f54');
+			}else{
+				$('#chart').css('background-color', 'white');
+			}
+			//console.log("clorkk :" +$bg_color.prop( "checked" ));
+			
+		    /* if($(this).is(":checked")) {
+		    	
+		       // var returnVal = confirm("Are you sure?");
+		        //$(this).attr("checked", returnVal);
+		    } */
+		 });      
+		
+	</script>
 
 	<!-- /Skycons -->
 

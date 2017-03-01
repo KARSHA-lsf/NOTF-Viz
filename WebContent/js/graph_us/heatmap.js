@@ -4,7 +4,7 @@ var margin = { top: 80, right: 20, bottom: 50, left: 150 },
  height = cellSize*row_number , // - margin.top - margin.bottom,
  //gridSize = Math.floor(width / 24),
  legendElementWidth = cellSize*2.5,
- colorBuckets = 20,
+ //colorBuckets = 20,
  
  hccol = [],
  hcrow = []; // change to gene name or probe id
@@ -107,10 +107,10 @@ function(error, data) {
        
               //Update the tooltip position and value
               d3.select("#tooltip")
-                .style("left", (d3.event.pageX+10) + "px")
-                .style("top", (d3.event.pageY+10) + "px")
+                .style("left", (d3.event.pageX-100) + "px")
+                .style("top", (d3.event.pageY-80) + "px")
                 .select("#value")
-                .html("Date :"+colLabel[d.row_id-1]+" and "+rowLabel[d.fact_id-1]+"<br /> Value :"+d.value);  
+                .html(y_col+" :"+colLabel[d.row_id-1]+" and "+rowLabel[d.fact_id-1]+"<br /> Value :"+d.value);  
               //Show the tooltip
               d3.select("#tooltip").classed("hidden", false);
        })
