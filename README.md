@@ -1,2 +1,2 @@
-# LM-NOTF
-visualization for LMn , LMx and AmNeg NOTF result 
+# NOTF-Viz
+This visualization dashboard for the visualization purpose of  non negative tensor factorization.
