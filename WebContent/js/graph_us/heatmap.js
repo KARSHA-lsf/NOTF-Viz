@@ -27,6 +27,8 @@ d3.json("getDetails/HeatMapController/"+tabel,
  };
 }, */
 function(error, data) {
+	
+	console.log(data);
 	//var largest = Math.max.apply(Math, array);
 	var largest = Math.max.apply(Math,data.map(function(o){return o.value;}))
 	//console.log( largest);

@@ -123,8 +123,13 @@
      url="jdbc:mysql://localhost/notf-viz"
      user="root"  password=""/>
 		<sql:query dataSource="${snapshot}" var="result">
-		SELECT * from records where hash_key = <%= key_request %> ;
+		SELECT * from vnotf_records where hash_key = <%= key_request %> ;
 		</sql:query>
+		<sql:query dataSource="${snapshot}" var="result_title">
+		SELECT hash_key_title from vnotf_records where hash_key = <%= key_request %> limit 1 ;
+		</sql:query>
+		
+	
     <div class="container body">
 
       <div class="main_container">
@@ -150,26 +155,26 @@
 
             <br />
 
-			 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+			   <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-              <h3>LSF</h3><br />
-                <br />
-                	  <div ng-app="HHF" ng-controller="MenuCtrl">
-					  <menu menus='menus' location='side-menu'>
-					  	<ul class="nav {{loc}}">
-		                 <li ng-repeat="item in menus.MenuItems">
-		                 	<a><i class="fa fa-home"></i>LMX<span class="fa fa-chevron-down"></span></a>
-		                    <ul class="nav child_menu">
-		                        <li ng-repeat="subitem in item.subItem">
-		                    		<a href="{{subitem.link}}">permno</a>
-		                    	</li>
-		                    </ul>
-		                  </li>
-		                  </ul> 
-					  </menu>
-					</div>
+                <h3>Visualization</h3>
+                <ul class="nav side-menu">
+                  <c:forEach var="row" items="${result_title.rows}">
+                  <li><a><i class="fa fa-home"></i> <c:out value="${row.hash_key_title}"/> <span class="fa fa-chevron-down"></span></a>
+                  </c:forEach>
+                    <ul class="nav child_menu">
+                    <c:forEach var="row" items="${result.rows}">
+                      <li><a href=".\heatmap.jsp?key=<%= key_request %>&<c:out value="${row.parameters}"/>"><c:out value="${row.menu_item_name}"/></a></li>
+                    </c:forEach>
+                    </ul>
+                  </li>
+                 
+                </ul>
               </div>
-             </div>
+          
+
+            </div>
                 
            
           </div>
