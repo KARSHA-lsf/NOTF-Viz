@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+
+
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -111,10 +114,14 @@
   </head>
 
   <body class="nav-md">
+  <% String key_request = request.getParameter("key"); %>
+	<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
+     url="jdbc:mysql://localhost/notf-viz"
+     user="root"  password=""/>
+		<sql:query dataSource="${snapshot}" var="result">
+		SELECT * from records where hash_key = <%= key_request %> ;
+		</sql:query>
     <div class="container body">
-    
-   
-
 
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -131,8 +138,8 @@
                 <img src="images/img.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>LMx LMn 2004</span>
-                <h2>NOTF</h2>
+                <span>NOTF-Viz</span>
+                
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -141,37 +148,26 @@
 
 			 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>Lanka Software Foundation</h3><br />
-                	 <div ng-app="HHF" ng-controller="MenuCtrl">
-					  <menu menus='menus' location='side-menu'></menu>
+              <h3>LSF</h3><br />
+                <br />
+                	  <div ng-app="HHF" ng-controller="MenuCtrl">
+					  <menu menus='menus' location='side-menu'>
+					  	<ul class="nav {{loc}}">
+		                 <li ng-repeat="item in menus.MenuItems">
+		                 	<a><i class="fa fa-home"></i>LMX<span class="fa fa-chevron-down"></span></a>
+		                    <ul class="nav child_menu">
+		                        <li ng-repeat="subitem in item.subItem">
+		                    		<a href="{{subitem.link}}">permno</a>
+		                    	</li>
+		                    </ul>
+		                  </li>
+		                  </ul> 
+					  </menu>
 					</div>
               </div>
              </div>
                 
-            <!-- sidebar menu --><!-- 
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>Lanka Software Foundation</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i>LMx<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="index_Permno_LMx.html">Permno</a></li>
-                        <li><a href="index_Date_LMx.html">Date</a></li>
-                        <li><a href="index_NAICS_LMx.html">NAICS</a></li>
-                    </ul>
-                  </li>  
-                  <li><a><i class="fa fa-home"></i>LMn<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="index_Permno_LMn.html">Permno</a></li>
-                        <li><a href="index_Date_LMn.html">Date</a></li>
-                        <li><a href="index_NAICS_LMn.html">NAICS</a></li>
-                    </ul>
-                  </li>
-                  
-                </ul>
-              </div>
-            </div>
-            <!-- /sidebar menu -->
+           
           </div>
         </div>
 

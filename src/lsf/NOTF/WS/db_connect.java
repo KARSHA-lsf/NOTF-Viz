@@ -14,7 +14,7 @@ public class db_connect {
 	
 	 // JDBC driver name and database URL
 	   String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	   String DB_URL = "jdbc:mysql://localhost/lm-notf";
+	   String DB_URL = "jdbc:mysql://localhost/notf-viz";
 	   String USER = "root";
 	   String PASS = "";
 	     /*String DB_URL = "jdbc:mysql://clipdb-karsha.umiacs.umd.edu:3306/Karsha_CEP";
